@@ -135,6 +135,13 @@ Timer {
         case "embed:permissions": {
             if (data.title === "geolocation") {
                 permissions(data)
+            } else if (data.title === "desktopNotification") {
+                // Always allow for testing
+                sendAsyncMessage("embedui:permissions", {
+                    "allow": true,
+                    "checkedDontAsk": false,
+                    "id": data.id
+                })
             } else {
                 // Currently we don't support other permission requests.
                 sendAsyncMessage("embedui:permissions", {

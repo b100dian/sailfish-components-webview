@@ -53,7 +53,7 @@ void tst_downloadhelper::init()
     // Fail on test init if direction creation doesn't work.
     // If this assert occurs there is something else work in the system.
     bool dirCreated = dir.mkpath(dataLocation);
-    Q_ASSERT_X(dirCreated, Q_FUNC_INFO, QString("Can't create directory %1").arg(dataLocation).constData());
+    Q_ASSERT_X(dirCreated, Q_FUNC_INFO, (const char *)(QString("Can't create directory %1").arg(dataLocation).constData()));
 }
 
 void tst_downloadhelper::cleanup()
