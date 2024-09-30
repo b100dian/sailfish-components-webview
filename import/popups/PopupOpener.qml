@@ -13,12 +13,14 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import Sailfish.WebView.Popups 1.0 as Popups
 import Sailfish.WebView.Controls 1.0 as Controls
+import Nemo.Notifications 1.0
 
 Timer {
     id: root
 
     property var pageStack
     property Item parentItem
+    property Notification notification
     property QtObject tabModel: null
     property QtObject contentItem
     readonly property bool active: contextMenu && contextMenu.active || false
@@ -223,6 +225,13 @@ Timer {
 
     // Open prompt dialog
     function prompt(data) {
+        if (data.notification) {
+            notification.summary = data.notification.title
+            notification.body = data.notification.text
+            notification.publish()
+            return
+        }
+
         var defaultValue = !!data.defaultValue
                          ? data.defaultValue
                          : (!!data.inputs[0].value

@@ -16,6 +16,8 @@ import Sailfish.WebView 1.0
 import Sailfish.WebView.Controls 1.0
 import Sailfish.WebView.Popups 1.0
 import Sailfish.WebView.Pickers 1.0
+import Nemo.Notifications 1.0
+
 
 RawWebView {
     id: webview
@@ -159,12 +161,19 @@ RawWebView {
         contentItem: webview
     }
 
+    Notification {
+        id: notification
+        summary: ""
+        body: ""
+    }
+
     PopupOpener {
         id: popupOpener
 
         pageStack: pickerOpener.pageStack
         parentItem: webview.webViewPage || webview
         contentItem: webview
+        notification: notification
         downloadsEnabled: false
 
         onAboutToOpenPopup: webview.aboutToOpenPopup(topic, data)
